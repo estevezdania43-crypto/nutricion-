@@ -41,23 +41,19 @@ header p{margin-top:10px;font-size:1.1rem;opacity:.9}
   padding:40px 0;
 }
 
-/* GRID PRINCIPAL CENTRADO */
+/* GRID PRINCIPAL */
 .main-grid{
   display:grid;
-  grid-template-columns: minmax(520px, 1fr) minmax(520px, 1fr);
-  gap:60px;
-  justify-content:center;
-  align-items:start;
+  grid-template-columns:1.2fr 1.5fr;
+  gap:40px;
 }
 
-/* TARJETAS GRANDES Y CENTRADAS */
+/* TARJETAS GRANDES */
 .card{
   background:white;
   border-radius:22px;
   padding:35px;
   box-shadow:var(--sombra);
-  width:100%;
-  margin:0 auto;
 }
 
 /* TITULOS */
@@ -129,6 +125,7 @@ tr:hover{background:#f8fdfc}
 }
 .edit{background:#f39c12}
 .delete{background:#e74c3c}
+.save{background:#27ae60}
 
 /* BADGES IMC */
 .badge{
@@ -181,7 +178,7 @@ footer{
 
 <div class="main-grid">
 
-<!-- REGISTRO DE PACIENTES -->
+<!-- PACIENTES -->
 <div class="card">
 <h2>Registro de Pacientes</h2>
 
@@ -200,7 +197,7 @@ footer{
 </table>
 </div>
 
-<!-- EVALUACIÓN IMC -->
+<!-- IMC -->
 <div class="card">
 <h2>Evaluación IMC</h2>
 
@@ -258,20 +255,43 @@ footer{
 <div class="card">
 <h2>Rutinas y Orientación Física</h2>
 
-<div class="rutina"><b>Bajar peso</b><br>
-Cardio 40–50 min • Hidratación • Constancia • 5 días/semana</div>
+<div class="rutina">
+<b>Bajar peso</b><br>
+• Cardio 40–50 min (caminar, bicicleta, elíptica)<br>
+• Alimentación balanceada<br>
+• Hidratación constante<br>
+• Rutina 5 días por semana
+</div>
 
-<div class="rutina"><b>Subir masa muscular</b><br>
-Pesas 4–6 días • Progresión • Proteína • Descanso</div>
+<div class="rutina">
+<b>Subir masa muscular</b><br>
+• Entrenamiento de fuerza 4–6 días<br>
+• Aumento progresivo de cargas<br>
+• Descanso adecuado<br>
+• Consumo adecuado de proteínas
+</div>
 
-<div class="rutina"><b>Tonificación</b><br>
-Fuerza + funcional • Series medias • Core</div>
+<div class="rutina">
+<b>Tonificación</b><br>
+• Fuerza + ejercicios funcionales<br>
+• Series medias y altas repeticiones<br>
+• Trabajo de core y estabilidad
+</div>
 
-<div class="rutina"><b>Salud general</b><br>
-Caminatas • Movilidad • Estiramientos</div>
+<div class="rutina">
+<b>Salud general</b><br>
+• Caminatas diarias<br>
+• Estiramientos<br>
+• Movilidad articular<br>
+• Actividad moderada constante
+</div>
 
-<div class="rutina"><b>Resistencia</b><br>
-Correr • Nadar • Ciclismo • Respiración</div>
+<div class="rutina">
+<b>Resistencia física</b><br>
+• Correr, nadar o ciclismo<br>
+• Sesiones progresivas<br>
+• Control de respiración
+</div>
 
 </div>
 
@@ -287,6 +307,7 @@ Consultorio Nutricional © 2026
 let pacientes=[], imcs=[];
 let editP=-1, editI=-1;
 
+/* PACIENTES */
 function guardarPaciente(){
   let obj={n:pnombre.value,e:pedad.value,m:pmeta.value};
   editP>=0?pacientes[editP]=obj:pacientes.push(obj);
@@ -314,6 +335,7 @@ function editarPaciente(i){
   editP=i;
 }
 
+/* IMC */
 function guardarIMC(){
   let imc=(ipeso.value/(ialtura.value**2)).toFixed(2);
   let estado=imc<18.5?"Bajo peso":imc<25?"Normal":"Sobrepeso";
@@ -345,6 +367,8 @@ function renderIMC(){
 function editarIMC(i){
   let x=imcs[i];
   inombre.value=x.n;
+  ipeso.value="";
+  ialtura.value="";
   editI=i;
 }
 </script>
