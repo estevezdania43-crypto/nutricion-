@@ -1,252 +1,335 @@
-# nutricion-
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <title>Consultorio Nutricional</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-*{
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+:root{
+    --verde:#2ecc71;
+    --verde-oscuro:#1e8449;
+    --gris:#f4f6f8;
+    --texto:#2c3e50;
+    --sombra:0 12px 30px rgba(0,0,0,.1);
 }
+
+*{box-sizing:border-box;font-family:Poppins}
+
 body{
     margin:0;
-    background:#f2f6f9;
-    color:#2c3e50;
+    background:var(--gris);
+    color:var(--texto);
 }
+
 header{
     background:linear-gradient(135deg,#2ecc71,#27ae60);
     color:white;
     padding:40px;
     text-align:center;
 }
-header h1{
-    margin:0;
-    font-size:2.5em;
-}
-header p{
-    margin-top:10px;
-    font-size:1.1em;
-}
+
+header h1{margin:0;font-size:2.6rem}
+header p{opacity:.9}
+
 .container{
-    width:90%;
-    max-width:1200px;
+    width:95%;
+    max-width:1400px;
     margin:auto;
+    padding:30px 0;
 }
+
+/* GRID PRINCIPAL */
+.grid-main{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:30px;
+}
+
+/* TARJETAS */
 .card{
     background:white;
+    border-radius:16px;
     padding:25px;
-    margin:30px 0;
-    border-radius:12px;
-    box-shadow:0 10px 25px rgba(0,0,0,0.08);
+    box-shadow:var(--sombra);
+    transition:.3s;
 }
+.card:hover{transform:translateY(-4px)}
+
 h2{
+    color:var(--verde-oscuro);
     margin-top:0;
-    color:#27ae60;
 }
+
+/* FORMULARIOS */
+.form-group{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-bottom:15px;
+}
+
 input{
     padding:10px;
-    margin:5px;
-    border-radius:8px;
+    border-radius:10px;
     border:1px solid #ccc;
-    width:200px;
+    flex:1;
+    min-width:150px;
 }
+
 button{
-    padding:10px 15px;
+    padding:10px 16px;
     border:none;
-    border-radius:8px;
-    background:#27ae60;
+    border-radius:10px;
+    background:var(--verde);
     color:white;
     font-weight:600;
     cursor:pointer;
+    transition:.3s;
 }
-button:hover{
-    background:#1e8449;
-}
+button:hover{background:var(--verde-oscuro)}
+
+.btn-danger{background:#e74c3c}
+.btn-warning{background:#f39c12}
+
+/* TABLAS */
 table{
     width:100%;
     border-collapse:collapse;
     margin-top:15px;
 }
+
 th{
-    background:#27ae60;
+    background:var(--verde);
     color:white;
     padding:10px;
 }
+
 td{
     padding:10px;
     text-align:center;
-    border-bottom:1px solid #ddd;
+    border-bottom:1px solid #eee;
 }
-.section-title{
-    margin-top:30px;
+
+tr:hover{background:#f9f9f9}
+
+/* ETIQUETAS IMC */
+.badge{
+    padding:6px 12px;
+    border-radius:20px;
+    color:white;
+    font-size:.85rem;
     font-weight:600;
 }
+.bajo{background:#f1c40f}
+.normal{background:#2ecc71}
+.alto{background:#e74c3c}
+
+/* GRID SECUNDARIO */
+.grid-bottom{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:30px;
+    margin-top:30px;
+}
+
+/* RUTINAS */
+.rutina{
+    background:#ecfdf5;
+    border-left:6px solid var(--verde);
+    padding:15px;
+    margin-bottom:10px;
+    border-radius:10px;
+}
+
 footer{
-    background:#1e8449;
+    background:var(--verde-oscuro);
     color:white;
     text-align:center;
     padding:15px;
     margin-top:40px;
 }
-.tag{
-    padding:5px 10px;
-    border-radius:20px;
-    color:white;
-    font-size:0.85em;
-}
-.bajo{background:#f1c40f;}
-.normal{background:#2ecc71;}
-.alto{background:#e74c3c;}
 </style>
 </head>
 
 <body>
 
 <header>
-<h1>Consultorio Nutricional</h1>
-<p>Cuidamos tu salud, mejoramos tu calidad de vida</p>
+<h1>Consultorio Nutricional Inteligente</h1>
+<p>Evaluación, diagnóstico y recomendaciones personalizadas</p>
 </header>
 
 <div class="container">
 
-<div class="card">
-<h2>Registro de Pacientes</h2>
+<!-- GRID PRINCIPAL -->
+<div class="grid-main">
 
-<input type="text" id="nombre" placeholder="Nombre">
-<input type="number" id="edad" placeholder="Edad">
-<input type="text" id="meta" placeholder="Meta">
-<button onclick="agregarPaciente()">Agregar</button>
+<!-- PACIENTES -->
+<div class="card">
+<h2>Pacientes</h2>
+
+<div class="form-group">
+<input id="pNombre" placeholder="Nombre">
+<input id="pEdad" type="number" placeholder="Edad">
+<input id="pMeta" placeholder="Meta">
+<button onclick="addPaciente()">Guardar</button>
+</div>
 
 <table>
-<thead>
-<tr>
-<th>Nombre</th><th>Edad</th><th>Meta</th><th>Acciones</th>
-</tr>
-</thead>
+<tr><th>Nombre</th><th>Edad</th><th>Meta</th><th>Acciones</th></tr>
 <tbody id="tablaPacientes"></tbody>
 </table>
-
-<h3 class="section-title">Historial</h3>
-<table>
-<tr><th>Nombre</th><th>Edad</th><th>Meta</th></tr>
-<tbody id="historialPacientes"></tbody>
-</table>
 </div>
 
+<!-- IMC -->
 <div class="card">
-<h2>Cálculo de IMC</h2>
+<h2>Evaluación IMC (IA)</h2>
 
-<input type="text" id="nombreIMC" placeholder="Nombre">
-<input type="number" id="peso" placeholder="Peso (kg)">
-<input type="number" id="altura" placeholder="Altura (m)">
-<button onclick="calcularIMC()">Calcular</button>
+<div class="form-group">
+<input id="iNombre" placeholder="Nombre">
+<input id="iPeso" type="number" placeholder="Peso kg">
+<input id="iAltura" type="number" placeholder="Altura m">
+<button onclick="addIMC()">Analizar</button>
+</div>
 
 <table>
-<thead>
 <tr>
-<th>Nombre</th>
-<th>IMC</th>
-<th>Estado</th>
-<th>Recomendaciones</th>
-<th>Acciones</th>
+<th>Paciente</th><th>IMC</th><th>Estado</th><th>IA Recomienda</th><th></th>
 </tr>
-</thead>
 <tbody id="tablaIMC"></tbody>
 </table>
-
-<h3 class="section-title">Historial IMC</h3>
-<table>
-<tr><th>Nombre</th><th>IMC</th><th>Estado</th></tr>
-<tbody id="historialIMC"></tbody>
-</table>
 </div>
 
+</div>
+
+<!-- GRID INFERIOR -->
+<div class="grid-bottom">
+
+<!-- BENEFICIOS -->
 <div class="card">
-<h2>Beneficios de un Estilo de Vida Saludable</h2>
+<h2>20 Beneficios de una Vida Saludable</h2>
 <table>
 <tr><th>#</th><th>Beneficio</th></tr>
-<tbody>
-<script>
-const beneficios=[
-"Mejora la salud cardiovascular","Aumenta la energía","Refuerza el sistema inmune",
-"Controla el peso","Reduce el estrés","Mejora el sueño","Previene enfermedades",
-"Fortalece músculos","Mejora la digestión","Aumenta la concentración",
-"Reduce ansiedad","Mejora la autoestima","Mayor longevidad","Mejor movilidad",
-"Regula la presión","Mejora la respiración","Reduce riesgo de diabetes",
-"Salud mental","Bienestar general","Mayor calidad de vida"
-];
-beneficios.forEach((b,i)=>{
-document.write(`<tr><td>${i+1}</td><td>${b}</td></tr>`);
-});
-</script>
-</tbody>
+<tbody id="beneficios"></tbody>
 </table>
 </div>
 
+<!-- RUTINAS -->
 <div class="card">
-<h2>Rutinas de Ejercicio según la Meta</h2>
-<table>
-<tr><th>Meta</th><th>Rutina Recomendada</th></tr>
-<tr><td>Bajar peso</td><td>Cardio 30–40 min + dieta balanceada</td></tr>
-<tr><td>Subir masa muscular</td><td>Entrenamiento de fuerza 4–5 días</td></tr>
-<tr><td>Tonificar</td><td>Ejercicios funcionales y resistencia</td></tr>
-<tr><td>Resistencia</td><td>Correr, nadar o bicicleta</td></tr>
-<tr><td>Salud general</td><td>Yoga, caminatas y estiramientos</td></tr>
-</table>
+<h2>Rutinas Inteligentes por Meta</h2>
+
+<div class="rutina">
+<b>Bajar peso</b><br>
+• Cardio 40 min<br>
+• Déficit calórico moderado<br>
+• Hidratación constante<br>
+• Dormir 7–8 h
+</div>
+
+<div class="rutina">
+<b>Subir masa muscular</b><br>
+• Pesas 4–5 días<br>
+• Proteína suficiente<br>
+• Progresión de cargas<br>
+• Descanso activo
+</div>
+
+<div class="rutina">
+<b>Tonificar</b><br>
+• Fuerza + HIIT<br>
+• Dieta equilibrada<br>
+• Rutinas funcionales
+</div>
+
+<div class="rutina">
+<b>Salud general</b><br>
+• Caminatas diarias<br>
+• Yoga / movilidad<br>
+• Alimentación consciente
+</div>
+
+</div>
+
 </div>
 
 </div>
 
 <footer>
-<p>Consultorio Nutricional © 2026</p>
+Consultorio Nutricional © 2026
 </footer>
 
 <script>
 let pacientes=[], imcs=[];
 
-function agregarPaciente(){
-    const n=nombre.value,e=edad.value,m=meta.value;
-    pacientes.push({n,e,m});
+/* PACIENTES CRUD */
+function addPaciente(){
+    pacientes.push({
+        n:pNombre.value,
+        e:pEdad.value,
+        m:pMeta.value
+    });
     renderPacientes();
 }
 
 function renderPacientes(){
     tablaPacientes.innerHTML="";
-    historialPacientes.innerHTML="";
     pacientes.forEach((p,i)=>{
         tablaPacientes.innerHTML+=`
-        <tr><td>${p.n}</td><td>${p.e}</td><td>${p.m}</td>
-        <td><button onclick="pacientes.splice(${i},1);renderPacientes()">Eliminar</button></td></tr>`;
-        historialPacientes.innerHTML+=`<tr><td>${p.n}</td><td>${p.e}</td><td>${p.m}</td></tr>`;
+        <tr>
+        <td>${p.n}</td>
+        <td>${p.e}</td>
+        <td>${p.m}</td>
+        <td>
+        <button class="btn-danger" onclick="pacientes.splice(${i},1);renderPacientes()">X</button>
+        </td>
+        </tr>`;
     });
 }
 
-function calcularIMC(){
-    let imc=(peso.value/(altura.value**2)).toFixed(2);
-    let estado="", clase="", rec="";
-    if(imc<18.5){estado="Bajo peso";clase="bajo";rec="Más proteínas, 5 comidas, fuerza";}
-    else if(imc<25){estado="Normal";clase="normal";rec="Mantener hábitos saludables";}
-    else{estado="Sobrepeso";clase="alto";rec="Menos azúcares, cardio, agua";}
-    imcs.push({n:nombreIMC.value,imc,estado,clase,rec});
+/* IMC CON LÓGICA IA */
+function addIMC(){
+    let imc=(iPeso.value/(iAltura.value**2)).toFixed(2);
+    let estado,clase,rec;
+
+    if(imc<18.5){
+        estado="Bajo peso";clase="bajo";
+        rec="Aumentar calorías, fuerza, más comidas";
+    }else if(imc<25){
+        estado="Normal";clase="normal";
+        rec="Mantener hábitos y constancia";
+    }else{
+        estado="Sobrepeso";clase="alto";
+        rec="Reducir azúcares, cardio y disciplina";
+    }
+
+    imcs.push({n:iNombre.value,imc,estado,clase,rec});
     renderIMC();
 }
 
 function renderIMC(){
     tablaIMC.innerHTML="";
-    historialIMC.innerHTML="";
-    imcs.forEach((i,x)=>{
+    imcs.forEach((x,i)=>{
         tablaIMC.innerHTML+=`
-        <tr><td>${i.n}</td><td>${i.imc}</td>
-        <td><span class="tag ${i.clase}">${i.estado}</span></td>
-        <td>${i.rec}</td>
-        <td><button onclick="imcs.splice(${x},1);renderIMC()">Eliminar</button></td></tr>`;
-        historialIMC.innerHTML+=`<tr><td>${i.n}</td><td>${i.imc}</td><td>${i.estado}</td></tr>`;
+        <tr>
+        <td>${x.n}</td>
+        <td>${x.imc}</td>
+        <td><span class="badge ${x.clase}">${x.estado}</span></td>
+        <td>${x.rec}</td>
+        <td><button class="btn-danger" onclick="imcs.splice(${i},1);renderIMC()">X</button></td>
+        </tr>`;
     });
 }
+
+/* BENEFICIOS */
+const lista=[
+"Mejor corazón","Más energía","Sistema inmune fuerte","Peso controlado",
+"Menos estrés","Sueño profundo","Mejor digestión","Autoestima alta",
+"Previene enfermedades","Músculos fuertes","Mayor movilidad",
+"Salud mental","Longevidad","Mejor respiración","Concentración",
+"Menos ansiedad","Vida activa","Mejor postura","Bienestar","Calidad de vida"
+];
+beneficios.innerHTML=lista.map((b,i)=>`<tr><td>${i+1}</td><td>${b}</td></tr>`).join("");
 </script>
 
 </body>
