@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Consultorio Nutricional</title>
+<title>Consultorio Nutricional Esteves</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
 
@@ -300,7 +300,7 @@ footer{
 </div>
 
 <footer>
-Consultorio Nutricional © 2026
+PROYECTO SUBMODULO FELIZA ALCANTARA
 </footer>
 
 <script>
